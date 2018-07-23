@@ -1,0 +1,36 @@
+﻿html, body, #viewDiv  {
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+
+}
+
+#viewDiv {
+    background-color: #580000;
+}
+
+
+
+
+#optionsDiv {
+    top:0px;
+    right:0px;
+position:absolute;
+display:flex;
+flex-flow: column;
+align-items: flex-end;
+z-index:1000;
+background-color: #FFF;
+border: 1px solid rgba(50, 50, 50, 0.25);
+margin:10px;
+padding: 10px;
+
+
+}
+
+#optionsDiv select {
+    margin: 20px;
+}
+
+ 
