@@ -1,9 +1,12 @@
-﻿require(["esri/Map",
+﻿
+require(["esri/Map",
     "esri/views/MapView",
     "esri/widgets/BasemapGallery",
     "esri/layers/FeatureLayer",
+    "esri/request",
      "esri/Graphic",
       "esri/layers/GraphicsLayer",
+    "esri/geometry/geometryEngine",
     "esri/widgets/Legend",
     "esri/widgets/LayerList",
     "esri/widgets/Search",
@@ -30,8 +33,10 @@
         MapView,
          BasemapGallery,
         FeatureLayer,
+        Request,
         Graphic,
         GraphicsLayer,
+        geometryEngine,
         Legend,
         LayerList,
         Search, Locator, PopupTemplate,
@@ -48,11 +53,17 @@
         query
 
 
-        /* MAP IMAGE
-       *************************************************************************************************************************/
+        //        MapImage
     ) {
-        /* MY CODE STARTS HERE
-       *************************************************************************************************************************/
+        console.log("Hello World!");
+
+
+
+
+
+        //my code starts here
+        //Throw query result for parks and fields to work on Button Click
+
         var amenityTypeValue = 'BALL FIELD';
 
         on(query("#doBtn")[0], "click", function (e) {
@@ -60,42 +71,68 @@
             //grab the value of the currently selected attribute
             runAmenitiesQuery(amenityTypeValue);
         });
-
+        //*********************************************************************//
         on(dom.byId("attSelect"), "change", function (event) {
             amenityTypeValue = event.target.value;
 
         });
 
+        //*************************************************************************
+        /*
+        
+        getCount(9);
+
+        function getCount(layerid)
+        {
+
+            var queryurl = "https://services3.arcgis.com/0OPQIK59PJJqLK0A/ArcGIS/rest/services/COC_PARKS_PROJECT2/FeatureServer/" + layerid+"/query";
+            var queryOptions = {
+
+                responseType: "json",
+                query: {
+                    f: "json",
+                    where: "1=1",
+                    returnCountOnly: true
+
+                }
+
+            }
+            Request(queryurl, queryOptions).then(response => alert(response.data.count));
+
+
+        }
+        
+
+     */
+        //****************************************************************************************************************************************************************************
 
 
 
 
-        /* ADD A MAP
-       *************************************************************************************************************************/
+
+
+
+
+
+
+
+
+
+        //****************************************************************************************************************************************************************************
+
 
         var myMap = new Map({
-
-
-
-            basemap: "hybrid", opacity: 0.8
-
-
+            basemap: "gray-vector"
         });
-
-        /* ADD A MAPVIEW
-       *************************************************************************************************************************/
 
         var mapView = new MapView({
             map: myMap,
             center: [-111.830815, 33.274270],
             container: "viewDiv",
-            zoom: 13,
+            zoom: 11.5,
 
         });
 
-
-        /* ADD A LOCATE BUTTON TO THE MAP
-       *************************************************************************************************************************/
         var locateBtn = new Locate({
             view: mapView
         });
@@ -106,8 +143,7 @@
         });
 
 
-        /* ADD A HOME BUTTON TO THE MAP
-        *************************************************************************************************************************/
+        //Add a home button
         var home = new Home({
             view: mapView
         });
@@ -117,9 +153,226 @@
 
 
 
+        // POP UPS
+        var popupFountain = {
+            title: "{FOUNTAIN_DESC}",
+            content: [{
+
+                type: "fields",
+                fieldInfos: [{
+                    fieldName: "PARK_NAME",
+                    label: "Park Name",
+                    visible: true
+                }, {
+                    fieldName: "NUMBER_OF_FAUCETS",
+                    label: "Number of faucets",
+                    visible: true,
+                    format: {
+                        digitSeparator: true,
+                        places: 0
+                    }
+                }, {
+                    fieldName: "DOG_FAUCETS",
+                    label: "Dog faucets",
+                    visible: true,
+                    format: {
+                        digitSeparator: true,
+                        places: 0
+                    }
+                }]
+            }]
+        };
+
+
+        /* Add popups For playgrounds
+              *************************************************************************************************************************/
+
+
+        var popupPlayground = {
+            title: "PLAYGROUND AT: {PARK_NAME}",
+            content: [{
+                type: "fields",
+                fieldInfos: [{
+                    fieldName: "PLAYGROUND_NAME",
+                    label: "Playground name",
+                    visible: true
+                }, {
+                    fieldName: "PLAYGROUND_DESC",
+                    label: "Playground Description",
+                    visible: true,
+                    format: {
+                        digitSeparator: true,
+                        places: 0
+                    }
+                }, {
+                    fieldName: "PLAYGROUND_TYPE",
+                    label: "Playground type",
+                    visible: true,
+                    format: {
+                        digitSeparator: true,
+                        places: 0
+                    }
+
+                }]
+            }]
+        };
+        /* Add popups for structures
+        *************************************************************************************************************************/
+
+        var popupStructure = {
+            title: "{STRUCTURE_TYPE}",
+            content: [{
+                type: "fields",
+                fieldInfos: [{
+                    fieldName: "STRUCTURE_DESC",
+                    label: "Structure Description",
+                    visible: true
+                }, {
+                    fieldName: "STRUCTURE_TYPE",
+                    label: "Structure type",
+                    visible: true,
+                    format: {
+                        digitSeparator: true,
+                        places: 0
+                    }
+                }, {
+                    fieldName: "STRUCTURE_NAME",
+                    label: "Structure name",
+                    visible: true,
+                    format: {
+                        digitSeparator: true,
+                        places: 0
+                    }
+                },
+//
+                    {
+                        fieldName: "STRUCTURE_TYPE",
+                        label: "Structure type",
+                        visible: true,
+                        format: {
+                            digitSeparator: true,
+                            places: 0
+                        }
+
+
+                    }]
+            }]
+        };
+
+        /* Add popups for walking trails
+        *************************************************************************************************************************/
+
+        var popupWalking = {
+            title: "WALKING PATH",
+            content: [{
+                type: "fields",
+                fieldInfos: [{
+                    fieldName: "DISTANCE",
+                    label: "Length",
+                    visible: true
+
+
+                }]
+            }]
+        };
+
+
+        /* Add popups for parking lots
+        *************************************************************************************************************************/
+
+        var popupParking = {
+            title: "PARKING LOT",
+            content: [{
+                type: "fields",
+                fieldInfos: [{
+                    fieldName: "PARK_NAME",
+                    label: "Park name",
+                    visible: true,
+                }, {
+                    fieldName: "Shape__Area",
+                    label: "Area(Ft)",
+                    visible: true,
+                    format: {
+                        digitSeparator: true,
+                        places: 0
+                    }
+
+
+                }]
+            }]
+        };
+
+        /* Add popups for lakes
+        *************************************************************************************************************************/
+
+        var popuplakes = {
+            title: "Amenitiy description: {AMENTITY_DESC}",
+            content: [{
+                type: "fields",
+                fieldInfos: [{
+                    fieldName: "AMENTITY_TYPE",
+                    label: "Amentity Type",
+                    visible: true,
+                    format: {
+                        digitSeparator: true,
+                        places: 0
+                    }
 
 
 
+                }]
+            }]
+        };
+
+        /* Add popups for courts
+        *************************************************************************************************************************/
+
+        var popupCourts = {
+            title: "COURTS",
+            content: [{
+                type: "fields",
+                fieldInfos: [{
+                    fieldName: "PARK_NAME",
+                    label: "Park name",
+                    visible: true
+                },
+                {
+                    fieldName: "COURT_TYPE",
+                    label: "Court type",
+                    visible: true,
+                    format: {
+                        digitSeparator: true,
+                        places: 0
+                    }
+
+                }]
+            }]
+        };
+
+        /* Add popups for fields
+        *************************************************************************************************************************/
+
+        var popupFields = {
+            title: "FIELDS",
+            content: [{
+                type: "fields",
+                fieldInfos: [{
+                    fieldName: "PARK_NAME",
+                    label: "Park name",
+                    visible: true
+                },
+                {
+                    fieldName: "AMENTITY_TYPE",
+                    label: "field type",
+                    visible: true,
+                    format: {
+                        digitSeparator: true,
+                        places: 0
+                    }
+
+                }]
+            }]
+        };
 
         /* POPUPS FOR DRINKING FOUNTAINS
         *************************************************************************************************************************/
@@ -196,15 +449,10 @@
                     fieldName: "STRUCTURE_DESC",
                     label: "Structure Description",
                     visible: true
-                }, {
-                    fieldName: "STRUCTURE_TYPE",
-                    label: "Structure type",
-                    visible: true,
-                    format: {
-                        digitSeparator: true,
-                        places: 0
-                    }
-                }, {
+                },
+
+
+                {
                     fieldName: "STRUCTURE_NAME",
                     label: "Structure name",
                     visible: true,
@@ -213,16 +461,29 @@
                         places: 0
                     }
                 },
-//
+
+
                     {
-                        fieldName: "STRUCTURE_TYPE",
-                        label: "Structure type",
+                        fieldName: "RESERVABLE_RAMADA",
+                        label: "If RAMADA, is it reservable:",
                         visible: true,
                         format: {
                             digitSeparator: true,
                             places: 0
                         }
-
+                        },
+                    {
+                        fieldName: "NOTES",
+                        label: "Notes",
+                        visible: true,
+                        format: {
+                            digitSeparator: true,
+                            places: 0
+                        }
+                   
+           
+            
+                 
 
                     }]
             }]
@@ -629,25 +890,101 @@
         /* END of POPUPS FOR FEATURE LAYERS
         *************************************************************************************************************************/
 
+        
+        
 
-        var parkPolyCount = 0;
-        /* START OF FEATURE LAYERS 
-       *************************************************************************************************************************/
-       
+        // Start of Feature layers
+        //********************
+
+        var basemapurl = "https://services3.arcgis.com/0OPQIK59PJJqLK0A/arcgis/rest/services/BASE_MAP/FeatureServer/0";
 
         var featureServiceURl = "https://services3.arcgis.com/0OPQIK59PJJqLK0A/ArcGIS/rest/services/COC_PARKS_PROJECT2/FeatureServer/";
 
 
+        var basemap1 = new FeatureLayer({
+            url: basemapurl
+        });
+        myMap.add(basemap1);
+
+
         var parkPoly = new FeatureLayer({
             url: featureServiceURl + "8",
-            id: "Park Poly",
+            //            id: "Park Poly",
             popupTemplate: popupPark
 
 
         });
         myMap.add(parkPoly);
 
-       
+
+
+        var courtfields = new FeatureLayer({
+            url: featureServiceURl + "9"
+        });
+            myMap.add(courtfields);
+        // *** GEOMETRY CODE - NOT WORKING ************************************************************************************//
+
+
+        /* CHECK
+        *************************************************************************************************************************/
+
+        console.log(courtfields);
+
+        var query4courtFields = courtfields.createQuery();
+        query4courtFields.where = 'EID=2100000026'
+        query4courtFields.outFields = ["*"];
+
+        courtfields.queryFeatures(query4courtFields)
+            .then(function (response) {
+                console.log(response.features[0]);
+
+                let geometryIsSimple = geometryEngine.isSimple(response.features[0].geometry)
+
+                console.log(geometryIsSimple);
+
+                let courtFieldPoly = response.features.map(function (polygon) {
+
+                    return polygon.geometry;
+
+
+                });
+
+                console.log(courtFieldPoly);
+
+
+                let query4ParkPoly = parkPoly.createQuery();
+                query4ParkPoly.where = "NAME='TUMBLEWEED'"
+                query4ParkPoly.outFields = ["*"];
+
+                parkPoly.queryFeatures(query4ParkPoly)
+                    .then(function (resParkPoly) {
+
+                        console.log(resParkPoly.features[0].geometry);
+
+                        console.log(response.features[0].geometry);
+
+                        let geometryIsSimple2 = geometryEngine.isSimple(resParkPoly.features[0].geometry)
+
+                        console.log(geometryIsSimple2);
+
+                        var intersects = geometryEngine.intersects([response.features[0].geometry, resParkPoly.features[0].geometry]);
+
+                        console.log(intersects);
+
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+
+            }).catch(function (error) {
+                console.log(error);
+
+            });
+
+
+
+
+        // *** GEOMETRY CODE - NOT WORKING ************************************************************************************// ABOVE ^^^^
+
 
         var fields = new FeatureLayer({
             url: featureServiceURl + "7",
@@ -698,11 +1035,13 @@
             popupTemplate: popupFountain
         });
         myMap.add(drinkingFountain);
-       
+        
 
 
         /* ADD A LEGEND TO THE MAP
         *************************************************************************************************************************/
+
+
         var legend = new Legend({
             view: mapView,
             layerInfos: [
@@ -718,8 +1057,10 @@
         });
         mapView.ui.add(legend, "bottom-left");
 
+
+
         /* ADD A LAYERLIST TO THE MAP
-         *************************************************************************************************************************/
+       *************************************************************************************************************************/
         var layerList = new LayerList({
             view: mapView,
             //listMode: "hide-children",
@@ -729,19 +1070,23 @@
                 var prefix = "COC_PARKS_PROJECT2 -";
                 var tempStr = item.title;
                 var finalTitle = tempStr.substring(20, item.title.length);
+
                 if (finalTitle === '') {
-                    item.title = 'PARKS';
+
+                    item.open = "PARKS";
+                    
                 }
                 else {
                     item.title = finalTitle;
                 }
 
+
+
                 console.log(item.title);
-               
+                
 
             }
         });
-        // Adds widget below other elements in the top left corner of the view
         mapView.ui.add(layerList, {
             position: "bottom-right"
         });
@@ -750,12 +1095,11 @@
 
 
         /* ADD A SEARCH WIDGET TO THE MAP
-            *************************************************************************************************************************/
-
+        *************************************************************************************************************************/
         var searchWidget = new Search({
             view: mapView,
             sources: [{
-                
+
                 featureLayer: parkPoly,
                 searchFields: ["MAPTITLE"],
                 displayField: "MAPTITLE",
@@ -827,15 +1171,10 @@
                       suggestionsEnabled: true,
                       minSuggestCharacters: 0,
                   },
-                
-
-
 
             {
 
-
-
-            locator: new Locator({ url: "//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer" }),
+                locator: new Locator({ url: "//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer" }),
                 singleLineFieldName: "SingleLine",
                 name: "Custom Geocoding Service",
                 localSearchOptions: {
@@ -847,12 +1186,10 @@
                 maxSuggestions: 20,
                 suggestionsEnabled: false,
                 minSuggestCharacters: 0
-            
-                
+
+
             }]
         });
-        // Adds the search widget below other elements in
-        // the top left corner of the view
         mapView.ui.add(searchWidget, {
             position: "top-left",
             index: 2
@@ -860,47 +1197,39 @@
 
 
         /* ADD A BASEMAP GALLERY TO THE MAP
-        *************************************************************************************************************************/
+       *************************************************************************************************************************/
 
         var basemapGallery = new BasemapGallery({
             view: mapView,
             container: document.createElement("div")
         });
 
-        // Create an Expand instance and set the content
-        // property to the DOM node of the basemap gallery widget
-        // Use an Esri icon font to represent the content inside
-        // of the Expand widget
-
         var bgExpand = new Expand({
             view: mapView,
             content: basemapGallery
         });
 
-        // Add the expand instance to the ui
-
         mapView.ui.add(bgExpand, "top-left");
 
 
 
-        /* START OF QUERY FEATURES
-        *************************************************************************************************************************/
-
+        /* QUERY ATTRIBUTES FOR AMENITIES 
+       *************************************************************************************************************************/
         function runAmenitiesQuery(infieldValue) {
 
-            var fieldNmae = 'AMENTITY_TYPE';
+            var fieldNmae = 'COURT_TYPE';
             var fieldValue = infieldValue;
             var whereClause = fieldNmae + "='" + infieldValue + "'";
 
             var parkList = [];
 
-            var query = fields.createQuery();
+            var query = courtfields.createQuery();
             query.where = whereClause;
             query.returnGeometry = false;
             query.returnDistinctValues = true;
             query.outFields = ["PARK_NAME"];
 
-            fields.queryFeatures(query)
+            courtfields.queryFeatures(query)
               .then(function (response) {
                   parkList = response.features.map(function (feature) {
                       return "'" + feature.attributes.PARK_NAME + "'";
@@ -910,10 +1239,11 @@
 
 
               });
-
-
         }
 
+
+        /* QUERY THE PARK POLYGON
+       *************************************************************************************************************************/
 
         function runParksQueries(inParkList) {
             console.log(inParkList);
@@ -933,8 +1263,8 @@
                           symbol: {
                               type: "simple-fill", // autocasts as new SimpleFillSymbol()
                               outline: {
-                                  width: 5,
-                                  color: [255, 128, 0, 1]
+                                  width: 7,
+                                  color: [115, 0, 0, 1]
                               },
                               style: "none"
                           }
@@ -947,11 +1277,12 @@
               });
 
         }
-        /* END OF QUERY FEATURES
-        *************************************************************************************************************************/
 
+
+
+
+
+        /* MY CODE ENDS HERE
+        *************************************************************************************************************************/
     });
 
-
-/* MY CODE ENDS HERE
-        *************************************************************************************************************************/
