@@ -1,3 +1,4 @@
+
 require(["esri/Map",
     "esri/views/MapView",
     "esri/widgets/BasemapGallery",
@@ -168,26 +169,26 @@ require(["esri/Map",
         content: [{
             type: "fields",
             fieldInfos: [{
-                    fieldName: "STRUCTURE_DESC",
-                    label: "Structure Description",
-                    visible: true
-                }, {
-                    fieldName: "STRUCTURE_TYPE",
-                    label: "Structure type",
-                    visible: true,
-                    format: {
-                        digitSeparator: true,
-                        places: 0
-                    }
-                }, {
-                    fieldName: "STRUCTURE_NAME",
-                    label: "Structure name",
-                    visible: true,
-                    format: {
-                        digitSeparator: true,
-                        places: 0
-                    }
-                },
+                fieldName: "STRUCTURE_DESC",
+                label: "Structure Description",
+                visible: true
+            }, {
+                fieldName: "STRUCTURE_TYPE",
+                label: "Structure type",
+                visible: true,
+                format: {
+                    digitSeparator: true,
+                    places: 0
+                }
+            }, {
+                fieldName: "STRUCTURE_NAME",
+                label: "Structure name",
+                visible: true,
+                format: {
+                    digitSeparator: true,
+                    places: 0
+                }
+            },
                 //
                 {
                     fieldName: "STRUCTURE_TYPE",
@@ -277,10 +278,10 @@ require(["esri/Map",
         content: [{
             type: "fields",
             fieldInfos: [{
-                    fieldName: "PARK_NAME",
-                    label: "Park name",
-                    visible: true
-                },
+                fieldName: "PARK_NAME",
+                label: "Park name",
+                visible: true
+            },
                 {
                     fieldName: "COURT_TYPE",
                     label: "Court type",
@@ -303,10 +304,10 @@ require(["esri/Map",
         content: [{
             type: "fields",
             fieldInfos: [{
-                    fieldName: "PARK_NAME",
-                    label: "Park name",
-                    visible: true
-                },
+                fieldName: "PARK_NAME",
+                label: "Park name",
+                visible: true
+            },
                 {
                     fieldName: "AMENTITY_TYPE",
                     label: "field type",
@@ -393,30 +394,40 @@ require(["esri/Map",
         content: [{
             type: "fields",
             fieldInfos: [{
-                    fieldName: "STRUCTURE_DESC",
-                    label: "Structure Description",
-                    visible: true
-                }, {
-                    fieldName: "STRUCTURE_TYPE",
-                    label: "Structure type",
-                    visible: true,
-                    format: {
-                        digitSeparator: true,
-                        places: 0
-                    }
-                }, {
-                    fieldName: "STRUCTURE_NAME",
-                    label: "Structure name",
+                fieldName: "STRUCTURE_DESC",
+                label: "Structure Description",
+                visible: true
+            }, {
+                fieldName: "STRUCTURE_TYPE",
+                label: "Structure type",
+                visible: true,
+                format: {
+                    digitSeparator: true,
+                    places: 0
+                }
+            }, {
+                fieldName: "STRUCTURE_NAME",
+                label: "Structure name",
+                visible: true,
+                format: {
+                    digitSeparator: true,
+                    places: 0
+                }
+            },
+                
+                {
+                    fieldName: "RESERVABLE_RAMADA",
+                    label: "If RAMADA, is it reservable:",
                     visible: true,
                     format: {
                         digitSeparator: true,
                         places: 0
                     }
                 },
-                //
+
                 {
-                    fieldName: "RESERVABLE_RAMADA",
-                    label: "If RAMADA, is it reservable:",
+                    fieldName: "NOTES",
+                    label: "Status ",
                     visible: true,
                     format: {
                         digitSeparator: true,
@@ -502,10 +513,10 @@ require(["esri/Map",
         content: [{
             type: "fields",
             fieldInfos: [{
-                    fieldName: "PARK_NAME",
-                    label: "Park name",
-                    visible: true
-                },
+                fieldName: "PARK_NAME",
+                label: "Park name",
+                visible: true
+            },
                 {
                     fieldName: "COURT_TYPE",
                     label: "Court type",
@@ -528,10 +539,10 @@ require(["esri/Map",
         content: [{
             type: "fields",
             fieldInfos: [{
-                    fieldName: "PARK_NAME",
-                    label: "Park name",
-                    visible: true
-                },
+                fieldName: "PARK_NAME",
+                label: "Park name",
+                visible: true
+            },
                 {
                     fieldName: "AMENTITY_TYPE",
                     label: "field type",
@@ -556,50 +567,50 @@ require(["esri/Map",
 
             type: "fields",
             fieldInfos: [{
-                    fieldName: "PARK_TYPE",
-                    label: "Park Type",
-                    visible: true
-                }, {
-                    fieldName: "ADDRESS",
-                    label: "Address",
-                    visible: true,
-                    format: {
-                        digitSeparator: true,
-                        places: 0
-                    }
-                }, {
-                    fieldName: "ACREAGE",
-                    label: "Acres ",
-                    visible: true,
-                    format: {
-                        digitSeparator: true,
-                        places: 0
-                    }
-                }, {
-                    fieldName: "DRINKING_FOUNTAIN",
-                    label: "Drinking fountains",
-                    visible: true,
-                    format: {
-                        digitSeparator: true,
-                        places: 0
-                    }
-                }, {
-                    fieldName: "SPRAY_PAD ",
-                    label: "Spray pads",
-                    visible: true,
-                    format: {
-                        digitSeparator: true,
-                        places: 0
-                    }
-                }, {
-                    fieldName: "WALKING_TRAILS ",
-                    label: "Walking trials",
-                    visible: true,
-                    format: {
-                        digitSeparator: true,
-                        places: 0
-                    }
-                },
+                fieldName: "PARK_TYPE",
+                label: "Park Type",
+                visible: true
+            }, {
+                fieldName: "ADDRESS",
+                label: "Address",
+                visible: true,
+                format: {
+                    digitSeparator: true,
+                    places: 0
+                }
+            }, {
+                fieldName: "ACREAGE",
+                label: "Acres ",
+                visible: true,
+                format: {
+                    digitSeparator: true,
+                    places: 0
+                }
+            }, {
+                fieldName: "DRINKING_FOUNTAIN",
+                label: "Drinking fountains",
+                visible: true,
+                format: {
+                    digitSeparator: true,
+                    places: 0
+                }
+            }, {
+                fieldName: "SPRAY_PAD ",
+                label: "Spray pads",
+                visible: true,
+                format: {
+                    digitSeparator: true,
+                    places: 0
+                }
+            }, {
+                fieldName: "WALKING_TRAILS ",
+                label: "Walking trials",
+                visible: true,
+                format: {
+                    digitSeparator: true,
+                    places: 0
+                }
+            },
                 {
                     fieldName: "PLAYGROUNDS",
                     label: "Playgrounds",
@@ -811,7 +822,7 @@ require(["esri/Map",
     };
 
 
-    /* GET RID OF NULL VALUES
+    /* GET RID OF NULL VALUES in the Park popup menu
      *************************************************************************************************************************/
     var popupPark = {
         title: "{MAPTITLE}",
@@ -833,12 +844,12 @@ require(["esri/Map",
     /* END of POPUPS FOR FEATURE LAYERS
      *************************************************************************************************************************/
 
-    // END of Pop UPS
+   
 
-    var parkPolyCount = 0;
+    
 
-    // Start of Feature layers
-    //********************
+    /* Start of feature layers
+       *************************************************************************************************************************/
 
     var basemapurl = "https://services3.arcgis.com/0OPQIK59PJJqLK0A/arcgis/rest/services/BASE_MAP/FeatureServer/0";
 
@@ -919,15 +930,16 @@ require(["esri/Map",
 
 
 
-    //legend
+    /* Add a legend to the map
+     *************************************************************************************************************************/
 
 
     var legend = new Legend({
         view: mapView,
         layerInfos: [{
-                layer: drinkingFountain,
-                title: 'Drinking Fountians'
-            },
+            layer: drinkingFountain,
+            title: 'Drinking Fountians'
+        },
             {
                 layer: playGround,
                 title: 'Play Grounds'
@@ -966,7 +978,8 @@ require(["esri/Map",
 
 
 
-    //Layer List Widget
+    /* Add a layer list to the map
+     *************************************************************************************************************************/
     var layerList = new LayerList({
         view: mapView,
         //listMode: "hide-children",
@@ -987,12 +1000,7 @@ require(["esri/Map",
 
 
 
-            //console.log(item.title);
-            /*
-            if (item.title === " NEW CS PARK POLY") {
-                item.title = "NEW CS PARK POLY";
-            }
-            */
+    
 
         }
     });
@@ -1011,26 +1019,26 @@ require(["esri/Map",
 
 
 
-
-    //Search Widget
+    /* Add a search widget to the map for Parks, Fields, courts, playgrounds, sturctures
+     *************************************************************************************************************************/
 
     var searchWidget = new Search({
         view: mapView,
         sources: [{
 
-                featureLayer: parkPoly,
-                searchFields: ["MAPTITLE"],
-                displayField: "MAPTITLE",
-                exactMatch: false,
-                outFields: ["*"],
-                name: "PARKS",
-                placeholder: "example: TUMBLEWEED",
-                maxResults: 15,
-                maxSuggestions: 20,
-                suggestionsEnabled: true,
-                minSuggestCharacters: 0,
+            featureLayer: parkPoly,
+            searchFields: ["MAPTITLE"],
+            displayField: "MAPTITLE",
+            exactMatch: false,
+            outFields: ["*"],
+            name: "PARKS",
+            placeholder: "example: TUMBLEWEED",
+            maxResults: 15,
+            maxSuggestions: 20,
+            suggestionsEnabled: true,
+            minSuggestCharacters: 0,
 
-            },
+        },
             {
                 featureLayer: fields,
                 searchFields: ["AMENTITY_TYPE", "PARK_NAME"],
@@ -1128,8 +1136,8 @@ require(["esri/Map",
     });
 
 
-    // Create a BasemapGallery widget instance and set
-    // its container to a div element
+    /* ADD A BASEMAP GALLERY TO THE MAP WITH EXPAND
+     *************************************************************************************************************************/
 
     var basemapGallery = new BasemapGallery({
         view: mapView,
@@ -1150,8 +1158,9 @@ require(["esri/Map",
 
     mapView.ui.add(bgExpand, "top-left");
 
-    //Court and Field Query
-
+    
+    /* QUERY FEATURES WITH GEOMETRY FOR COURTS AND FIELDS
+     *************************************************************************************************************************/
 
     function runAmenitiesQuery(infieldValue) {
 
@@ -1210,7 +1219,7 @@ require(["esri/Map",
                                     type: "simple-fill", // autocasts as new SimpleFillSymbol()
                                     outline: {
                                         width: 3,
-                                        color: [244, 163, 0, 3]
+                                        color: [173, 0, 173]  // 76, 30, 76
                                     },
                                     style: "none"
                                 }
@@ -1231,45 +1240,7 @@ require(["esri/Map",
     }
 
 
-    //Park Poly Query
-/*
-    function runParksQueries(inParkList) {
-        //console.log(inParkList);
-
-        var parkQuery = parkPoly.createQuery();
-        parkQuery.where = "NAME IN (" + inParkList.toString() + ")";
-        parkQuery.outFields = ["*"];
-        parkQuery.outSpatialReference = mapView.spatialReference;
-        parkPoly.queryFeatures(parkQuery)
-            .then(function(response) {
-                //console.log(response);
-                mapView.graphics.removeAll();
-
-                for (feature in response.features) {
-                    var bufferGraphic = new Graphic({
-                        geometry: response.features[feature].geometry,
-                        symbol: {
-                            type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                            outline: {
-                                width: 7,
-                                color: [115, 0, 0, 1]
-                            },
-                            style: "none"
-                        }
-                    });
-                    //console.log(bufferGraphic.geometry);
-                    mapView.graphics.add(bufferGraphic);
-
-
-                }
-
-
-
-
-            });
-
-    }
-
-*/
-
+   
+    /* MY CODE ENDS HERE
+         *************************************************************************************************************************/
 });
