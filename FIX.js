@@ -1227,6 +1227,10 @@ require(["esri/Map",
                             //console.log(bufferGraphic.geometry);
                             mapView.graphics.add(bufferGraphic);
                         }
+                    // print the number of results returned to the user
+                        dom.byId("printResults").innerHTML = courtFieldPoly.length + " "+
+                         fieldValue + "'s found in Parks!";
+
 
                     }).catch(function(error) {
                         console.log(error);
